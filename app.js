@@ -294,7 +294,7 @@ function updateScore() {
     if (isUserBatting) {
       alert("Hurryay!!! you've won the match");
     } else {
-      alert("You can't even win against computer");
+      alert("You can't even win against AI");
     }
     document.removeEventListener("keypress", playAttempt);
   }

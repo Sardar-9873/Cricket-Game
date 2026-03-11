@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Game</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="name-wrapper" class="flex">
+        <input type="text" id="name" placeholder="Enter Your Name">
+        <button id="name-next">Next</button>
+    </div>
+
+    <div id="level-wrapper" class="none">
+        <label><input type="radio" id="easy" value="Easy" name="level">Easy</label>
+        <label><input type="radio" id="medium" value="Medium" name="level">Medium</label>
+        <label><input type="radio" id="hard" value="Hard" name="level">Hard</label>
+        <button id="level-next">Next</button>
+    </div>
+
+    <div id="team-wrapper" class="none">
+        <div class="team">Pakistan</div>
+        <div class="team">South Africa</div>
+        <div class="team">England</div>
+        <div class="team">New Zealand</div>
+        <div class="team">West Indies</div>
+        <div class="team">SMIT Cheeteh</div>
+    </div>
+
+    <div id="toss-wrapper" class="none">
+        <div class="coin" id="1">Heads</div>
+        <div class="coin" id="2">Tails</div>
+    </div>
+
+    <div id="batting-selection-wrapper" class="none">
+        <div class="batting-option" id="batting">Batting</div>
+        <div class="batting-option" id="bowling">Bowling</div>
+    </div>
+
+
+    <div id="play-wrapper" class="none">
+        <p id="team"></p>
+        <p>Name: <span id="name"></span></p>
+        <p>Type: <span id="type"></span></p>
+        <p>Level: <span id="level"></span></p>
+        <p>Wickets: <span id="wickets"></span></p>
+        <p>Score: <span id="score"></span></p>
+        <p>Target: <span id="target">N/A</span></p>
+        <button id="play">Click to Play</button>
+    </div>
+
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

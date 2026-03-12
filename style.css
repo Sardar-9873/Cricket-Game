@@ -1,10 +1,14 @@
 html {
   font-family: sans-serif;
+  /* background-image: url(https://t3.ftcdn.net/jpg/17/97/40/28/240_F_1797402827_0PnC9AwVXVQ3ERzLu5yBUQTaGcCXrBrR.jpg); */
 }
+
 #team-wrapper {
+  margin-top: calc(50vh - 100px);
   align-items: center;
   justify-content: space-around;
 }
+
 #team-wrapper > .team {
   height: 100px;
   padding: 2px;
@@ -13,18 +17,68 @@ html {
   justify-content: center;
   width: 150px;
   border-radius: 2px;
-  border: 2px solid yellow;
+  border: 2px solid black;
   font-size: 24px;
   font-family: sans-serif;
   font-weight: bold;
-  background: #2a7b9b;
   cursor: pointer;
+  border-radius: 12px;
+  text-align: center;
+}
+
+#team-wrapper > #pakistan{
+  background: green;
   background: linear-gradient(
     90deg,
-    rgba(42, 123, 155, 1) 0%,
-    rgba(87, 199, 133, 1) 50%,
-    rgba(237, 221, 83, 1) 100%
+    rgb(10, 105, 2) 0%,
+    rgba(15, 245, 7) 50%,
+    rgb(255, 255, 255) 100%
   );
+}
+
+#team-wrapper > #south-africa{
+  background: red;
+  background: linear-gradient(
+    90deg,
+    red 0%,
+    blue 100%
+  );
+}
+
+#team-wrapper > #england{
+  background: red;
+  background: linear-gradient(
+    90deg,
+    red 0%,
+    white 50%,
+    blue 100%
+  );
+}
+
+#team-wrapper > #new-zealand{
+  background: red;
+  background: linear-gradient(
+    90deg,
+    red 0%,
+    yellow 50%,
+    blue 100%
+  );
+}
+
+#team-wrapper > #west-indies{
+  background: darkred;
+  color: antiquewhite;
+}
+
+#team-wrapper > #smit-cheeteh{
+  background: blue;
+  background: linear-gradient(
+    90deg,
+    blue 0%,
+    green 50%,
+    black 100%
+  );
+  color: antiquewhite;
 }
 
 .none {
@@ -39,32 +93,58 @@ html {
   display: block;
 }
 
+#toss-wrapper{
+  margin: auto;
+  margin-top: calc(50vh - 100px);
+  background-color: black;
+  width: max-content;
+  border-radius: 12px;
+}
+
 #toss-wrapper > .coin {
   height: 100px;
   width: 100px;
   border-radius: 100%;
-  border: 2px rgb(189, 189, 189) dashed;
-  background-color: goldenrod;
+  border: 4px gray dashed;
+  background-color: gold;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 6px;
   cursor: pointer;
+  font-weight: bold;
 }
 
+#batting-selection-wrapper{
+  margin-top: calc(50vh - 100px);
+  margin-left: calc(50vw - 150px);
+}
 
 #batting-selection-wrapper > .batting-option {
   height: 100px;
-  padding: 2px;
+  padding: 6px;
+  margin: 6px;
   display: inherit;
   align-items: center;
   justify-content: center;
   width: 150px;
-  border-radius: 2px;
-  border: 2px solid yellow;
+  border-radius: 12px;
+  border: 2px solid black;
   font-size: 24px;
   font-family: sans-serif;
   font-weight: bold;
-  background: #2a7b9b;
+  cursor: pointer;
+  background-color: Green;
+}
+
+label > input:hover{
+  cursor: pointer;
+}
+
+label[for]{
+  cursor: pointer;
+}
+
+button:hover{
   cursor: pointer;
 }

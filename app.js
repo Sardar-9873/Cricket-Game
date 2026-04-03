@@ -8,6 +8,28 @@ let totalwickets = 0;
 let target = 0;
 let lastWicketFall = null;
 let attempt = [];
+let tossSound = document.getElementById("toss-sound");
+let fourSound = document.getElementById("4-sound");
+let sixSound = document.getElementById("6-sound");
+let wicketSound = document.getElementById("wicket-sound");
+let fireworkInterval;
+
+
+function playToss() {
+  tossSound.play();
+}
+
+function playFour() {
+  wicketSound.play();
+}
+
+function playSix() {
+  sixSound.play();
+}
+
+function playWicket() {
+  fourSound.play();
+}
 
 const nameWrapper = document.getElementById("name-wrapper");
 const nameNextButton = nameWrapper.querySelector("button");
@@ -33,6 +55,72 @@ const targetEl = playWrapper.querySelector("#target");
 const typeEl = playWrapper.querySelector("#type");
 const teamEl = playWrapper.querySelector("#team");
 const levelEl = playWrapper.querySelector("#level");
+const infoEl = playWrapper.querySelector(".none");
+
+const resultWrapper = document.getElementById("result-wrapper");
+const victory = resultWrapper.querySelector("#victory");
+const defeat = resultWrapper.querySelector("#defeat");
+
+
+function createFirework() {
+  const container = document.getElementById("fireworks");
+
+  const x = Math.random() * window.innerWidth;
+  const y = Math.random() * window.innerHeight * 0.5;
+
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+
+    particle.style.left = x + "px";
+    particle.style.top = y + "px";
+
+    particle.style.backgroundColor =
+      "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+
+    container.appendChild(particle);
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 120 + 50;
+
+    const xMove = Math.cos(angle) * distance;
+    const yMove = Math.sin(angle) * distance;
+
+    particle.animate(
+      [
+        { transform: "translate(0,0)", opacity: 1 },
+        { transform: `translate(${xMove}px, ${yMove}px)`, opacity: 0 }
+      ],
+      {
+        duration: 1000,
+        easing: "ease-out"
+      }
+    );
+
+    setTimeout(() => {
+      particle.remove();
+    }, 1000);
+  }
+}
+
+function stopFireworks() {
+  clearInterval(fireworkInterval);
+}
+
+function userWon() {
+  resultWrapper.classList.replace("none", "flex");
+  defeat.classList.add("none");
+  victory.classList.replace("none", "block");
+  playSix();
+  fireworkInterval = setInterval(createFirework, 600);
+}
+
+function userLose() {
+  resultWrapper.classList.replace("none", "flex");
+  victory.classList.add("none");
+  defeat.classList.replace("none", "block");
+  playSix();
+}
 
 function getUserName() {
   const value = nameInput.value;
@@ -56,43 +144,43 @@ function getUserLevel() {
   const isConfirm = confirm("Are you sure you want to play " + userLevel + " level");
 
 
-  if(isConfirm){
-  levelWrapper.remove();
-  teamWrapper.classList.replace("none", "flex");
-  }else{
+  if (isConfirm) {
+    levelWrapper.remove();
+    teamWrapper.classList.replace("none", "flex");
+  } else {
     return;
   }
 
-  if (userLevel === "Easy"){
+  if (userLevel === "Easy") {
     attempt = [
-  "score",
-  "score",
-  "score",
-  "score",
-  "wicket",
-  "score",
-  "score",
-  "score",
-  "score",
-];
-}else if(userLevel === "Medium"){
+      "score",
+      "score",
+      "score",
+      "score",
+      "wicket",
+      "score",
+      "score",
+      "score",
+      "score",
+    ];
+  } else if (userLevel === "Medium") {
     attempt = [
-  "score",
-  "score",
-  "wicket",
-  "score",
-  "score",
-  "score",
-];
-}else{
-attempt = [
-  "score",
-  "wicket",
-  "score",
-];
+      "score",
+      "score",
+      "wicket",
+      "score",
+      "score",
+      "score",
+    ];
+  } else {
+    attempt = [
+      "score",
+      "wicket",
+      "score",
+    ];
+  }
 }
-}
-levelNextButton.addEventListener("click" , getUserLevel);
+levelNextButton.addEventListener("click", getUserLevel);
 
 
 for (let i = 0; i < teams.length; i++) {
@@ -142,7 +230,7 @@ function autoSelectBattingOptionAndProceed() {
   } else {
     isUserBatting = true;
   }
-
+  playSix();
   tossWrapper.remove();
   showAndUpdatePlay();
 }
@@ -150,6 +238,7 @@ function autoSelectBattingOptionAndProceed() {
 function generateCoinResult() {
   const randomNumber = Math.random();
   const side = Math.ceil(randomNumber * 2);
+  playToss();
   return side.toString();
 }
 
@@ -177,6 +266,7 @@ function selectionOption(event) {
     isUserBatting = false;
   }
 
+  playSix();
   battingSelectionWrapper.remove();
   showAndUpdatePlay();
 }
@@ -196,7 +286,6 @@ function showAndUpdatePlay() {
 }
 
 
-
 const subAttempts = {
   score: [0, 1, 2, 3, 4, 5, 6],
   wicket: [
@@ -210,14 +299,12 @@ const subAttempts = {
   ],
 };
 playButton.addEventListener("click", function () {
-  document.addEventListener("keypress", playAttempt);
+  document.addEventListener("click", playAttempt);
   playButton.remove();
+  infoEl.classList.replace("none", "block");
 });
 
 function playAttempt(event) {
-  const isSpacePressed = event.keyCode === 32;
-  if (!isSpacePressed) return;
-  
 
   const randomNumerForAttempt = Math.random();
   const parentAttempInd = Math.floor(randomNumerForAttempt * attempt.length);
@@ -233,12 +320,13 @@ function playAttempt(event) {
 }
 
 function updateWicket() {
-    const wicketTypes = subAttempts.wicket;
-    const randomNumber = Math.random();
-    const wicketIndex = Math.floor(randomNumber * wicketTypes.length);
-    const wicket = wicketTypes[wicketIndex];
-    alert(`Wicket Out: ${wicket}`);
-  
+  const wicketTypes = subAttempts.wicket;
+  const randomNumber = Math.random();
+  const wicketIndex = Math.floor(randomNumber * wicketTypes.length);
+  const wicket = wicketTypes[wicketIndex];
+  playWicket();
+  alert(`Wicket Out: ${wicket}`);
+
   totalwickets++;
   wicketEl.innerText = totalwickets;
 
@@ -251,9 +339,11 @@ function updateWicket() {
         targetEl.innerText = target;
         const type = "Bowling";
         typeEl.innerText = `You're ${type}`;
+        playSix();
       } else {
-        alert("You've lost the match");
-        document.removeEventListener("keypress", playAttempt);
+        document.removeEventListener("click", playAttempt);
+        playWrapper.remove();
+        userLose();
       }
     } else {
       if (!target) {
@@ -263,9 +353,11 @@ function updateWicket() {
         alert("You've taken all the wickets");
         const type = "Batting";
         typeEl.innerText = `You're ${type}`;
+        playSix();
       } else {
-        alert("You've won the match");
-        document.removeEventListener("keypress", playAttempt);
+        document.removeEventListener("click", playAttempt);
+        playWrapper.remove();
+        userWon();
       }
     }
     totalwickets = 0;
@@ -276,8 +368,6 @@ function updateWicket() {
 }
 
 function updateScore() {
-  isTakingStance = false;
-
   const scoreTypes = subAttempts.score;
   const randomNumber = Math.random();
   const scoreIndex = Math.floor(randomNumber * 7);
@@ -290,12 +380,24 @@ function updateScore() {
   totalScore += score;
   scoreEl.innerText = totalScore;
 
+  if (score === 6) {
+    playSix();
+  } else if (score === 4) {
+    playFour();
+  }
+
   if (target && totalScore >= target) {
     if (isUserBatting) {
-      alert("Hurryay!!! you've won the match");
+      playWrapper.remove();
+      userWon();
     } else {
-      alert("You can't even win against AI");
+      playWrapper.remove();
+      userLose();
     }
-    document.removeEventListener("keypress", playAttempt);
+    document.removeEventListener("click", playAttempt);
   }
+}
+
+function restartGame() {
+  location.reload();
 }

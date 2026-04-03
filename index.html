@@ -9,49 +9,92 @@
 </head>
 
 <body>
-    <div id="name-wrapper" class="flex">
-        <input type="text" id="name" placeholder="Enter Your Name">
-        <button id="name-next">Next</button>
+    <div class="bg"></div>
+    <div class="overlay">
+
+        <nav class="navbar">
+            <div class="logo">
+                <h2>Cricket Game</h2>
+            </div>
+        </nav>
+
+        <div id="name-wrapper" class="flex">
+            <input type="text" id="name" placeholder="Enter Your Name">
+            <button id="name-next">Next</button>
+        </div>
+
+        <div id="level-wrapper" class="none">
+            <label id="level">Choose a level:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="easy" class="easy"><input type="radio" id="easy" value="Easy" name="level">Easy</label>
+            <label for="medium" class="medium"><input type="radio" id="medium" value="Medium"
+                    name="level">Medium</label>
+            <label for="hard" class="hard"><input type="radio" id="hard" value="Hard"
+                    name="level">Hard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <button id="level-next">Next</button>
+        </div>
+
+        <div id="team-wrapper" class="none">
+            <h1 class="team-selection">Select your Team:</h1>
+            <div class="team" id="pakistan">Pakistan</div>
+            <div class="team" id="south-africa">South Africa</div>
+            <div class="team" id="england">England</div>
+            <div class="team" id="new-zealand">New Zealand</div>
+            <div class="team" id="west-indies">West Indies</div>
+            <div class="team" id="smit-cheeteh">SMIT Cheeteh</div>
+        </div>
+
+        <div id="toss-wrapper" class="none">
+            <div class="coin" id="1">Heads</div>
+            <div class="coin" id="2">Tails</div>
+        </div>
+
+        <div id="batting-selection-wrapper" class="none">
+            <div class="batting-option" id="batting">Batting🏏</div>
+            <div class="batting-option" id="bowling">Bowling🥎</div>
+        </div>
+
+        <div id="play-wrapper" class="none">
+            <div class="info">
+                <p id="team"></p>
+                <p>Name: <span id="name"></span></p>
+                <p>Type: <span id="type"></span></p>
+                <p>Level: <span id="level"></span></p>
+            </div>
+
+            <div class="scoreboard">
+                <div class="score">
+                    <p>Score: <span id="score"></span></p>
+                </div>
+
+                <div class="wickets">
+                    <p>Wickets: <span id="wickets"></span></p>
+                </div>
+
+                <div class="target">
+                    <p>Target: <span id="target">N/A</span></p>
+                </div>
+            </div>
+
+            <button id="play">Click to Play</button>
+            <p class="none">Info: Click anywhere to play</p>
+        </div>
+
+        <div id="result-wrapper" class="none">
+            <div id="victory" class="none">
+                <div id="fireworks"></div>
+                <button id="play-again" onclick="restartGame()">Play Again</button>
+            </div>
+            <div id="defeat" class="none">
+                <button id="play-again" onclick="restartGame()">Play Again</button>
+            </div>
+        </div>
+
     </div>
 
-    <div id="level-wrapper" class="none">
-        <label id="level">Choose a level:</label>
-        <label for="easy"><input type="radio" id="easy" value="Easy" name="level">Easy</label>
-        <label for="medium"><input type="radio" id="medium" value="Medium" name="level">Medium</label>
-        <label for="hard"><input type="radio" id="hard" value="Hard" name="level">Hard</label>
-        <button id="level-next">Next</button>
-    </div>
-
-    <div id="team-wrapper" class="none">
-        <div class="team" id="pakistan">Pakistan</div>
-        <div class="team" id="south-africa">South Africa</div>
-        <div class="team" id="england">England</div>
-        <div class="team" id="new-zealand">New Zealand</div>
-        <div class="team" id="west-indies">West Indies</div>
-        <div class="team" id="smit-cheeteh">SMIT Cheeteh</div>
-    </div>
-
-    <div id="toss-wrapper" class="none">
-        <div class="coin" id="1">Heads</div>
-        <div class="coin" id="2">Tails</div>
-    </div>
-
-    <div id="batting-selection-wrapper" class="none">
-        <div class="batting-option" id="batting">Batting</div>
-        <div class="batting-option" id="bowling">Bowling</div>
-    </div>
-
-
-    <div id="play-wrapper" class="none">
-        <p id="team"></p>
-        <p>Name: <span id="name"></span></p>
-        <p>Type: <span id="type"></span></p>
-        <p>Level: <span id="level"></span></p>
-        <p>Wickets: <span id="wickets"></span></p>
-        <p>Score: <span id="score"></span></p>
-        <p>Target: <span id="target">N/A</span></p>
-        <button id="play">Click to Play</button>
-    </div>
+    <audio id="toss-sound" src="./Sounds/toss.mp3"></audio>
+    <audio id="4-sound" src="./Sounds/four.mp3"></audio>
+    <audio id="6-sound" src="./Sounds/six.mp3"></audio>
+    <audio id="wicket-sound" src="./Sounds/six.mp3"></audio>
 
 
     <script src="./app.js"></script>
